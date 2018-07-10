@@ -18,12 +18,13 @@ MIT LICENSE
 
 
 //Initial values for parameters
-var Initial_Values = {"S": 75.55, "I": 24.45, "Beta": 0.24, "Gamma": 0.06}, 
+var Initial_Values = {"S": 56.9, "I": 33.1, "V": 10.00, "Beta": 0.54, "Gamma": 0.05}, 
     Ranges         = {"S"    : {"min": 0, "max": 100},
                       "I"    : {"min": 0, "max": 100},
+                      "V"    : {"min": 0, "max": 100},
                       "Beta" : {"min": 0, "max": 1},
                       "Gamma": {"min": 0, "max": 1}};
-    suffixes = {"S": "%","I": "%","Beta": "contact/day", "Gamma": "infection/day"};
+    suffixes = {"S": "%","I": "%", "V": "%","Beta": "contacts/day", "Gamma": "infective/day"};
 
 
 function setsliders(Initial_Values, Ranges, suffixes, plotparams){
@@ -50,6 +51,7 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
 
     var Sslider     = document.getElementById("S");
     var Islider     = document.getElementById("I");
+    var Vslider     = document.getElementById("V");
     var betaslider  = document.getElementById("Beta");
     var gammaslider = document.getElementById("Gamma");
 
@@ -60,14 +62,23 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
         var Ival = Islider.noUiSlider.get();
             Ival = Number(Ival.substring(0, Ival.length - suffixes["I"].length));
 
+        var Vval = Vslider.noUiSlider.get();
+            Vval = Number(Vval.substring(0, Vval.length - suffixes["V"].length));            
+
         var betaval = betaslider.noUiSlider.get();
             betaval = Number(betaval.substring(0, betaval.length - suffixes["Beta"].length));
 
         var gammaval = gammaslider.noUiSlider.get();
             gammaval = Number(gammaval.substring(0, gammaval.length - suffixes["Gamma"].length));
         
-        Islider.noUiSlider.set(100 - Sval);
-
+        //First change infected then change vaccinated
+        if ( (100 - Vval - Sval) > 0){
+            Islider.noUiSlider.set(100 - Vval - Sval);    
+        } else {
+            Islider.noUiSlider.set(0); 
+            Vslider.noUiSlider.set(100 - Sval);
+        }
+        
         removePlotdata();
         var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
         setPlotdata(plotparams, newdata);
@@ -80,14 +91,52 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
 
         var Ival = Islider.noUiSlider.get();
             Ival = Number(Ival.substring(0, Ival.length - suffixes["I"].length));
-        
-        Sslider.noUiSlider.set(100 - Ival);
 
+        var Vval = Vslider.noUiSlider.get();
+            Vval = Number(Vval.substring(0, Vval.length - suffixes["V"].length));   
+        
         var betaval = betaslider.noUiSlider.get();
         betaval = Number(betaval.substring(0, betaval.length - suffixes["Beta"].length));
 
         var gammaval = gammaslider.noUiSlider.get();
             gammaval = Number(gammaval.substring(0, gammaval.length - suffixes["Gamma"].length));
+
+        //First change vaccinated then change infected
+        if ( (100 - Ival - Vval) > 0){
+            Sslider.noUiSlider.set(100 - Ival - Vval);    
+        } else {
+            Sslider.noUiSlider.set(0); 
+            Vslider.noUiSlider.set(100 - Ival);
+        }
+        
+        removePlotdata();
+        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
+        setPlotdata(plotparams, newdata);
+    });
+
+    Vslider.noUiSlider.on('slide', function(values, handle){
+        var Sval = Sslider.noUiSlider.get();
+            Sval = Number(Sval.substring(0, Sval.length - suffixes["S"].length));
+
+        var Ival = Islider.noUiSlider.get();
+            Ival = Number(Ival.substring(0, Ival.length - suffixes["I"].length));
+
+        var Vval = Vslider.noUiSlider.get();
+            Vval = Number(Vval.substring(0, Vval.length - suffixes["V"].length));   
+        
+        var betaval = betaslider.noUiSlider.get();
+        betaval = Number(betaval.substring(0, betaval.length - suffixes["Beta"].length));
+
+        var gammaval = gammaslider.noUiSlider.get();
+            gammaval = Number(gammaval.substring(0, gammaval.length - suffixes["Gamma"].length));
+
+        //First change vaccinated then change infected
+        if ( (100 - Ival - Vval) > 0){
+            Sslider.noUiSlider.set(100 - Vval - Ival);    
+        } else {
+            Sslider.noUiSlider.set(0); 
+            Islider.noUiSlider.set(100 - Vval);
+        }
         
         removePlotdata();
         var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);

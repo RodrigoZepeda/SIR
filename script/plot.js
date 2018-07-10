@@ -21,7 +21,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     xdomain      = {min: 0, max: 50},
     ydomain      = {min: 0, max: 100},
     debug        = false;
-var sline, iline, rline;
+var sline, iline, rline, stext, itext, rtext;
       
 function setPlot(margin, padding, xdomain, ydomain){
 
@@ -119,7 +119,13 @@ function setPlot(margin, padding, xdomain, ydomain){
 };
 
 function setPlotdata(plotparams, mydata){
-
+    
+    stext = plotparams["inner"].append('text')
+    .text('S')
+    .attr('fill',"purple")
+    .attr('text-anchor', 'middle')  
+    .attr('x', Xscale(mydata[mydata.length-1].t + 1))
+    .attr('y', Yscale(100*mydata[mydata.length-1].s));
     
     sline = plotparams["inner"].append("path")
     .attr("class", "functionpath")
@@ -130,6 +136,13 @@ function setPlotdata(plotparams, mydata){
     .style("fill", "none")
     .attr("transform", null);
 
+    itext = plotparams["inner"].append('text')
+    .text('I')
+    .attr('fill',"red")
+    .attr('text-anchor', 'middle')  
+    .attr('x', Xscale(mydata[mydata.length-1].t + 1))
+    .attr('y', Yscale(100*mydata[mydata.length-1].i));
+
     iline = plotparams["inner"].append("path")
     .attr("class", "functionpath")
     .datum(mydata)
@@ -138,6 +151,13 @@ function setPlotdata(plotparams, mydata){
     .style("stroke-width", 3)
     .style("fill", "none")
     .attr("transform", null); 
+
+    rtext = plotparams["inner"].append('text')
+    .text('R')
+    .attr('fill',"deepskyblue")
+    .attr('text-anchor', 'middle')  
+    .attr('x', Xscale(mydata[mydata.length-1].t + 1))
+    .attr('y', Yscale(100*(1 -mydata[mydata.length-1].s - mydata[mydata.length-1].i)));
 
     rline = plotparams["inner"].append("path")
     .attr("class", "functionpath")
@@ -154,6 +174,9 @@ function removePlotdata(){
     sline.remove();
     rline.remove();
     iline.remove();
+    stext.remove();
+    rtext.remove();
+    itext.remove();
 }
 
 

@@ -44,7 +44,7 @@
     
     <style>
         .uislider {
-            margin-bottom: 10%;
+            margin-bottom: 5%;
             margin-top: 5%;
             margin-right: 5%;
             margin-left: 5%;
@@ -58,17 +58,35 @@
             background: purple;
         }
 
+        #V .noUi-connect {
+            background: deepskyblue;
+        }
+
         #I .noUi-connect {
             background: red;
         }
 
-        .noUi-tooltip {
-            font-size: 65%;
-            opacity: 1;
-            /*background-color: transparent;
-            border-color: transparent;*/
+        #S .noUi-tooltip {
+            color: purple;
         }
-        .noUi-horizontal .noUi-tooltip  {bottom: -100%;}
+
+        #I .noUi-tooltip {
+            color: red;
+        }
+
+        #V .noUi-tooltip {
+            color: deepskyblue;
+        }
+        
+        .noUi-tooltip {
+            font-size: 70%;
+            opacity: 1;
+            background-color: transparent;
+            border-color: transparent;
+            color: darkslategrey;
+            padding: 1%;
+        }
+        .noUi-horizontal .noUi-tooltip  {bottom: 100%;}
 
         .inner {
             background-color: blue;
@@ -84,9 +102,9 @@
 
 <body>
         <div class="card mb-12 bg-secondary" style = "height: 100%;" >
-                <div class="card-header">
+                <!--<div class="card-header">
                     <h1>SIR Epidemiological Model</h1>
-                </div>
+                </div>-->
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-4">
@@ -99,16 +117,15 @@
                                     <h5 class = "uislider-title">Infected</h5>
                                     <p class = "card-text uislider-subtitle">Population (%) that have the disease</p>
                                     <div id="I" class = "uislider"></div>
-                                    <!--<p class = "uislider-title">Removed</p>
-                                    <div id="R" class = "uislider"></div>-->
+                                    <h5 class = "uislider-title">Vaccinated</h5>
+                                    <p class = "card-text uislider-subtitle">Population (%) that have been inocculated</p>
+                                    <div id="V" class = "uislider"></div>
                                     <h5 class = "uislider-title">Beta</h5>
                                     <p class = "card-text uislider-subtitle">Rate of contagion</p>
                                     <div id="Beta" class = "uislider"></div>
                                     <h5 class = "uislider-title">Gamma</h5>
                                     <p class = "card-text uislider-subtitle">Rate of recovery</p>
                                     <div id="Gamma" class = "uislider"></div>
-                                    <!--<p class = "uislider-title">Vaccination</p>
-                                    <div id="V" class = "uislider"></div>-->
                                 </div>
                             </div>
                         </div>
