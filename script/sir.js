@@ -22,7 +22,7 @@ function dF(S,I, beta = 1/2, gamma = 1/3){
 }
 
 
-function SIR(S0 = 1 - 1.27e-6, I0 = 1.27e-6, beta = 1/2, gamma = 1/3, time = 50, dt = 1){
+function SIR(S0 = 1 - 1.27e-6, I0 = 1.27e-6, beta = 1/2, gamma = 1/3, V0 = 0, time = 50, dt = 1){
     /*
     DESCRIPTION: Function that runs the SIR ordinary differential equation model via Runge-Kutta 4 algorithm
 
@@ -45,7 +45,7 @@ function SIR(S0 = 1 - 1.27e-6, I0 = 1.27e-6, beta = 1/2, gamma = 1/3, time = 50,
     */
 
     var k1,k2,k3,k4,
-        data = [{"s": S0, "i": I0, "t": 0}];
+        data = [{"s": S0, "i": I0, "v": V0, "t": 0}];
     do {
         
         k1 = dF(data[data.length - 1]["s"], data[data.length - 1]["i"], beta = beta, gamma = gamma);
@@ -55,7 +55,8 @@ function SIR(S0 = 1 - 1.27e-6, I0 = 1.27e-6, beta = 1/2, gamma = 1/3, time = 50,
 
         data.push({
             "s": data[data.length - 1]["s"] + dt*(k1["s"] + 2*k2["s"] + 2*k3["s"] + k4["s"])/6.0, 
-            "i": data[data.length - 1]["i"] + dt*(k1["i"] + 2*k2["i"] + 2*k3["i"] + k4["i"])/6.0, 
+            "i": data[data.length - 1]["i"] + dt*(k1["i"] + 2*k2["i"] + 2*k3["i"] + k4["i"])/6.0,
+            "v": V0, 
             "t": data[data.length - 1]["t"] + dt
         })
 

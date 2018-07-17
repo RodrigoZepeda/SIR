@@ -80,7 +80,7 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
         }
         
         removePlotdata();
-        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
+        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval, Vval/100);
         setPlotdata(plotparams, newdata);
 
     });
@@ -110,7 +110,7 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
         }
         
         removePlotdata();
-        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
+        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval, Vval/100);
         setPlotdata(plotparams, newdata);
     });
 
@@ -139,7 +139,7 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
         }
         
         removePlotdata();
-        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
+        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval, Vval/100);
         setPlotdata(plotparams, newdata);
     });
 
@@ -150,6 +150,9 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
         var Ival = Islider.noUiSlider.get();
             Ival = Number(Ival.substring(0, Ival.length - suffixes["I"].length));
 
+        var Vval = Vslider.noUiSlider.get();
+            Vval = Number(Vval.substring(0, Vval.length - suffixes["V"].length));               
+
         var betaval = betaslider.noUiSlider.get();
             betaval = Number(betaval.substring(0, betaval.length - suffixes["Beta"].length));
 
@@ -157,7 +160,7 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
             gammaval = Number(gammaval.substring(0, gammaval.length - suffixes["Gamma"].length));
 
         removePlotdata();
-        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
+        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval, Vval/100);
         setPlotdata(plotparams, newdata);
 
     });
@@ -169,6 +172,9 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
         var Ival = Islider.noUiSlider.get();
             Ival = Number(Ival.substring(0, Ival.length - suffixes["I"].length));
 
+        var Vval = Vslider.noUiSlider.get();
+            Vval = Number(Vval.substring(0, Vval.length - suffixes["V"].length));               
+
         var betaval = betaslider.noUiSlider.get();
             betaval = Number(betaval.substring(0, betaval.length - suffixes["Beta"].length));
 
@@ -176,7 +182,7 @@ function setsliders(Initial_Values, Ranges, suffixes, plotparams){
             gammaval = Number(gammaval.substring(0, gammaval.length - suffixes["Gamma"].length));
 
         removePlotdata();
-        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval);
+        var newdata = SIR(Sval/100, Ival/100, betaval, gammaval, Vval/100);
         setPlotdata(plotparams, newdata);
 
     });

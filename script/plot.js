@@ -111,10 +111,16 @@ function setPlot(margin, padding, xdomain, ydomain){
     // define the line
     var RemovedLine = d3.line()
         .x(function(d) { return Xscale(Math.max(d.t,0)); })
-        .y(function(d) { return Yscale(Math.min(Math.max(0,100*(1 - d.s - d.i)),100)); })
+        .y(function(d) { return Yscale(Math.min(Math.max(0,100*(1 - d.v - d.s - d.i)),100)); })
+        .curve(d3.curveBasis);
+        
+    // define the line
+    var VaccinedLine = d3.line()
+        .x(function(d) { return Xscale(Math.max(d.t,0)); })
+        .y(function(d) { return Yscale(Math.min(Math.max(0,100*(d.v)),100)); })
         .curve(d3.curveBasis);  
         
-    return {"inner": inner, "SusceptibleLine": SusceptibleLine, "InfectedLine": InfectedLine, "RemovedLine": RemovedLine};
+    return {"inner": inner, "SusceptibleLine": SusceptibleLine, "InfectedLine": InfectedLine, "RemovedLine": RemovedLine, "VaccinedLine": VaccinedLine};
   
 };
 
@@ -154,15 +160,31 @@ function setPlotdata(plotparams, mydata){
 
     rtext = plotparams["inner"].append('text')
     .text('R')
-    .attr('fill',"deepskyblue")
+    .attr('fill',"orange")
     .attr('text-anchor', 'middle')  
     .attr('x', Xscale(mydata[mydata.length-1].t + 1))
-    .attr('y', Yscale(100*(1 -mydata[mydata.length-1].s - mydata[mydata.length-1].i)));
+    .attr('y', Yscale(100*(1 - mydata[mydata.length-1].v - mydata[mydata.length-1].s - mydata[mydata.length-1].i)));
 
     rline = plotparams["inner"].append("path")
     .attr("class", "functionpath")
     .datum(mydata)
     .attr("d", plotparams["RemovedLine"])
+    .style("stroke", "orange")
+    .style("stroke-width", 3)
+    .style("fill", "none")
+    .attr("transform", null);
+
+    vtext = plotparams["inner"].append('text')
+    .text('V')
+    .attr('fill',"deepskyblue")
+    .attr('text-anchor', 'middle')  
+    .attr('x', Xscale(mydata[mydata.length-1].t + 1))
+    .attr('y', Yscale(100*(mydata[mydata.length-1].v)));
+
+    vline = plotparams["inner"].append("path")
+    .attr("class", "functionpath")
+    .datum(mydata)
+    .attr("d", plotparams["VaccinedLine"])
     .style("stroke", "deepskyblue")
     .style("stroke-width", 3)
     .style("fill", "none")
@@ -174,9 +196,11 @@ function removePlotdata(){
     sline.remove();
     rline.remove();
     iline.remove();
+    vline.remove();
     stext.remove();
     rtext.remove();
     itext.remove();
+    vtext.remove();
 }
 
 
@@ -185,6 +209,6 @@ window.onload = function(){
     setsliders(Initial_Values, Ranges, suffixes, plotparams);
     
     //Initial plot
-    setPlotdata(plotparams, SIR(Initial_Values["S"]/100, Initial_Values["I"]/100, Initial_Values["Beta"], Initial_Values["Gamma"]));
+    setPlotdata(plotparams, SIR(Initial_Values["S"]/100, Initial_Values["I"]/100, Initial_Values["Beta"], Initial_Values["Gamma"], Initial_Values["V"]/100));
          
     };    
