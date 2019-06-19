@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <!-- Developed by Rodrigo Zepeda -->
-<!-- MIT LICENSE 
+<!-- MIT LICENSE
     Copyright 2018 Rodrigo Zepeda
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
-    associated documentation files (the "Software"), to deal in the Software without restriction, 
-    including without limitation the rights to use, copy, modify, merge, publish, distribute, 
-    sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+    associated documentation files (the "Software"), to deal in the Software without restriction,
+    including without limitation the rights to use, copy, modify, merge, publish, distribute,
+    sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
     is furnished to do so, subject to the following conditions:
-    The above copyright notice and this permission notice shall be included in all copies or substantial 
+    The above copyright notice and this permission notice shall be included in all copies or substantial
     portions of the Software.
-    
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
-    DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <html lang="en">
@@ -38,8 +38,8 @@
 
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/nouislider.css">
-    
-    
+
+
 
     <script src="script/d3.min.js"></script> <!-- D3JS V 5.5-->
     <script src="script/wNumb.js"></script> <!-- https://refreshless.com/wnumb/ -->
@@ -47,9 +47,9 @@
     <script src="script/sir.js"></script> <!--Functions for running sir model-->
     <script src="script/sliders.js"></script> <!--Functions for controlling the ui-->
     <script src="script/plot.js"></script> <!--Functions for plotting-->
-    
-    
-    
+
+
+
     <style>
         .uislider {
             margin-bottom: 5%;
@@ -85,7 +85,7 @@
         #V .noUi-tooltip {
             color: deepskyblue;
         }
-        
+
         .noUi-tooltip {
             font-size: 70%;
             opacity: 1;
@@ -98,11 +98,11 @@
 
         .inner {
             background-color: blue;
-        }  
+        }
 
         .outer {
             background-color: orange;
-        }  
+        }
 
     </style>
 
@@ -119,20 +119,20 @@
                             <div class="card h-100" id ="parametercard">
                                 <div class="card-body">
                                     <h3 class="card-title">Model parameters</h3>
-                                    <h5 class = "uislider-title">Susceptible</h5>
+                                    <h5 class = "uislider-title">Susceptibles (S)</h5>
                                     <p class = "card-text uislider-subtitle">Population (%) that can get the disease</p>
                                     <div id="S" class = "uislider"></div>
-                                    <h5 class = "uislider-title">Infected</h5>
+                                    <h5 class = "uislider-title">Infected (I)</h5>
                                     <p class = "card-text uislider-subtitle">Population (%) that have the disease</p>
                                     <div id="I" class = "uislider"></div>
-                                    <h5 class = "uislider-title">Vaccinated</h5>
-                                    <p class = "card-text uislider-subtitle">Population (%) that have been inocculated</p>
+                                    <h5 class = "uislider-title">Vaccinated (V)</h5>
+                                    <p class = "card-text uislider-subtitle">Population (%) that have been vaccinated</p>
                                     <div id="V" class = "uislider"></div>
-                                    <h5 class = "uislider-title">Beta</h5>
-                                    <p class = "card-text uislider-subtitle">Rate of contagion</p>
+                                    <h5 class = "uislider-title">Rate of transmission</h5>
+                                    <p class = "card-text uislider-subtitle">Controls how fast the disease spreads</p>
                                     <div id="Beta" class = "uislider"></div>
-                                    <h5 class = "uislider-title">Gamma</h5>
-                                    <p class = "card-text uislider-subtitle">Rate of recovery</p>
+                                    <h5 class = "uislider-title">Rate of recovery</h5>
+                                    <p class = "card-text uislider-subtitle">Controls how fast people recover from the disease</p>
                                     <div id="Gamma" class = "uislider"></div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                     <h3 class="card-title">Model predictions</h3>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
